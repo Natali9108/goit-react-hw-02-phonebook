@@ -22,19 +22,15 @@ export class ContactForm extends Component {
   validationSchema = () => {
     const regexName =
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
-    const regexNameMessage =
-      "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan";
     const regexNumber =
       /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
-    const regexNumberMessage =
-      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +';
 
     return Yup.object().shape({
       name: Yup.string()
-        .matches(regexName, regexNameMessage)
+        .matches(regexName, 'Invalid name')
         .required('Required'),
       number: Yup.string()
-        .matches(regexNumber, regexNumberMessage)
+        .matches(regexNumber, 'Invalid number')
         .required('Required'),
     });
   };
@@ -49,13 +45,24 @@ export class ContactForm extends Component {
         <Form>
           <label htmlFor="name">
             Name
-            <Field type="text" name="name" />
-            <ErrorMessage name="name" render={msg => <div>{msg}</div>} />
+            <Field
+              type="text"
+              name="name"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+            />
+            <ErrorMessage component="div" name="name" />
           </label>
           <label htmlFor="number">
             Number
-            <Field type="tel" name="number" />
-            <ErrorMessage name="number" render={msg => <div>{msg}</div>} />
+            <Field
+              type="tel"
+              name="number"
+              title="Phone number must be digits and can contain
+            spaces, dashes, parentheses and can start with +"
+              required
+            />
+            <ErrorMessage component="div" name="number" />
           </label>
 
           <button type="submit">Add contact</button>
