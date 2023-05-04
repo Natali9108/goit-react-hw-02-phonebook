@@ -13,7 +13,7 @@ export class App extends Component {
   addContact = data => {
     const { name, number } = data;
     const { contacts } = this.state;
-
+    console.log(data);
     const contact = {
       id: nanoid(),
       name,
