@@ -23,7 +23,7 @@ export const Label = styled.label`
 
 export const Input = styled(Field)`
   padding: ${props => props.theme.spacing(2)};
-  width: 300px;
+  width: 100%; 
   font-size: ${props => props.theme.fontSizes.small};
   background-color: inherit;
   border: none;

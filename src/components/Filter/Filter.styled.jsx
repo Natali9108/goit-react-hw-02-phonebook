@@ -16,4 +16,8 @@ export const FilterField = styled.input`
   background-color: inherit;
   border: 1px solid ${props => props.theme.colors.borerFormColor};
   border-radius: ${props => props.theme.spacing(1)};
+
+  &:focus {
+    outline: 2px solid ${props => props.theme.colors.borerFormColor};
+    outline-offset: -2px;
 `;
