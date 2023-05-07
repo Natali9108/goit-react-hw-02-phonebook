@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import { Formik } from 'formik';
+import PropTypes from 'prop-types';
+import { validationSchema } from '../../utils';
+import {
+  PhonebookForm,
+  Label,
+  Input,
+  ErrorDescription,
+  AddBtn,
+} from './ContactForm.styled';
 
-export class ContactForm extends Component {
+class ContactForm extends Component {
   initialValues = {
     name: '',
     number: '',
@@ -19,55 +27,49 @@ export class ContactForm extends Component {
     actions.resetForm();
   };
 
-  validationSchema = () => {
-    const regexName =
-      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
-    const regexNumber =
-      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
-
-    return Yup.object().shape({
-      name: Yup.string()
-        .matches(regexName, 'Invalid name')
-        .required('Required'),
-      number: Yup.string()
-        .matches(regexNumber, 'Invalid number')
-        .required('Required'),
-    });
-  };
-
   render() {
     return (
       <Formik
         initialValues={this.initialValues}
-        validationSchema={this.validationSchema}
+        validationSchema={validationSchema}
         onSubmit={this.handleSubmit}
       >
-        <Form>
-          <label htmlFor="name">
-            Name
-            <Field
-              type="text"
-              name="name"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-            />
-            <ErrorMessage component="div" name="name" />
-          </label>
-          <label htmlFor="number">
-            Number
-            <Field
-              type="tel"
-              name="number"
-              title="Phone number must be digits and can contain
+        {({ isValid, dirty }) => (
+          <PhonebookForm autoComplete="off">
+            <Label htmlFor="name">
+              Name
+              <Input
+                type="text"
+                name="name"
+                title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                required
+              />
+              <ErrorDescription component="div" name="name" />
+            </Label>
+            <Label htmlFor="number">
+              Number
+              <Input
+                type="tel"
+                name="number"
+                title="Phone number must be digits and can contain
             spaces, dashes, parentheses and can start with +"
-              required
-            />
-            <ErrorMessage component="div" name="number" />
-          </label>
+                required
+              />
+              <ErrorDescription component="div" name="number" />
+            </Label>
 
-          <button type="submit">Add contact</button>
-        </Form>
+            <AddBtn type="submit" disabled={!isValid || !dirty}>
+              Add contact
+            </AddBtn>
+          </PhonebookForm>
+        )}
       </Formik>
     );
   }
 }
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
+
+export default ContactForm;

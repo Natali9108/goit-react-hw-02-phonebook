@@ -1,18 +1,39 @@
 import React from 'react';
+import { AiFillDelete } from 'react-icons/ai';
+import PropTypes from 'prop-types';
+import {
+  ContactsList,
+  ContactItem,
+  ContactText,
+  DeleteBtn,
+} from './ContactList.styled';
 
-export const ContactList = ({ items, onDeleteContact }) => {
+const ContactList = ({ items, onDeleteContact }) => {
   return (
-    <ul>
+    <ContactsList>
       {items.map(({ id, name, number }) => (
-        <li key={id}>
-          <p>
+        <ContactItem key={id}>
+          <ContactText>
             {name}: {number}
-          </p>
-          <button type="button" onClick={() => onDeleteContact(id)}>
-            Delete
-          </button>
-        </li>
+          </ContactText>
+          <DeleteBtn type="button" onClick={() => onDeleteContact(id)}>
+            <AiFillDelete />
+          </DeleteBtn>
+        </ContactItem>
       ))}
-    </ul>
+    </ContactsList>
   );
 };
+
+ContactList.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }).isRequired
+  ),
+  onDeleteContact: PropTypes.func.isRequired,
+};
+
+export default ContactList;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
-import { Filter } from './Filter/Filter';
+import ContactForm from '../ContactForm';
+import ContactList from '../ContactList';
+import Filter from '../Filter';
+import { Container, PhonebookTitle, ContactsTitle } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -13,7 +14,7 @@ export class App extends Component {
   addContact = data => {
     const { name, number } = data;
     const { contacts } = this.state;
-    console.log(data);
+
     const contact = {
       id: nanoid(),
       name,
@@ -22,7 +23,8 @@ export class App extends Component {
     const contactName = contacts.map(contact => contact.name.toLowerCase());
 
     if (contactName.includes(name.toLowerCase())) {
-      return alert(`${data.name} is already in contacts.`);
+      alert(`${data.name} is already in contacts.`);
+      return;
     }
 
     this.setState(({ contacts }) => ({
@@ -55,16 +57,16 @@ export class App extends Component {
     const visibleContacts = this.getVisibleContacts();
 
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <Container>
+        <PhonebookTitle>Phonebook</PhonebookTitle>
         <ContactForm onSubmit={this.addContact} />
-        <h2>Contacts</h2>
+        <ContactsTitle>Contacts</ContactsTitle>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList
           items={visibleContacts}
           onDeleteContact={this.onDeleteContact}
         />
-      </div>
+      </Container>
     );
   }
 }
