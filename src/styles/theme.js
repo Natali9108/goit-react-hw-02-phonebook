@@ -6,7 +6,7 @@ export const theme = Object.freeze({
     white: '#ffffff',
     green: '#4caf50',
     blue: '#1a46bb',
-    red: '#db1515',
+    red: '#991010',
     btnBgColor: '#cfce21',
     disabledBgColor: '#7e7e68',
     disabledColor: '#5a5a3c',

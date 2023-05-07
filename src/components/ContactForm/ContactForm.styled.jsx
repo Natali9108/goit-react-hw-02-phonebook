@@ -29,9 +29,18 @@ export const Input = styled(Field)`
   border: none;
   border-bottom: 1px solid ${props => props.theme.colors.borerFormColor};
   border-radius: ${props => props.theme.spacing(1)};
+
+  &:focus {
+    outline: 2px solid ${props => props.theme.colors.borerFormColor};
+    outline-offset: -2px;
+  }
+
+ 
+  }
 `;
 
 export const ErrorDescription = styled(ErrorMessage)`
+  font-size: ${props => props.theme.fontSizes.mini};
   color: ${props => props.theme.colors.red};
 `;
 

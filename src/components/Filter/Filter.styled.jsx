@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const FilterBox = styled.div`
-  padding: ${props => props.theme.spacing(5)};
+  margin-bottom: ${props => props.theme.spacing(5)};
   text-align: center;
 `;
 
