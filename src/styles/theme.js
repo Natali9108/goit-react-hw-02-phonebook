@@ -8,7 +8,8 @@ export const theme = Object.freeze({
     blue: '#1a46bb',
     red: '#db1515',
     btnBgColor: '#cfce21',
-    disabledColor: '#cfccb4',
+    disabledBgColor: '#7e7e68',
+    disabledColor: '#5a5a3c',
   },
 
   fontSizes: {

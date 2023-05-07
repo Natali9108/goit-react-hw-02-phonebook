@@ -59,7 +59,7 @@ export const AddBtn = styled.button`
 
   &:disabled {
     border: none;
-    background-color: ${props => props.theme.colors.disabledColor};
-    color: ${props => props.theme.colors.borerFormColor};
+    background-color: ${props => props.theme.colors.disabledBgColor};
+    color: ${props => props.theme.colors.disabledColor};
   }
 `;
